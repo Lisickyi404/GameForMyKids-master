@@ -1,0 +1,37 @@
+import pygame
+from sprites import *
+WorldWidth = 1200 # ширина игрового мира
+WorldHeight = 1800 # высота игрового мира
+ScreenWidth = 1200 #ширина окна программы
+ScreenHeight = 800 #высота окна программы
+
+
+window = pygame.display.set_mode ((ScreenWidth, ScreenHeight))
+world = pygame.Surface((WorldWidth, WorldHeight))
+
+player = Player(100,400,5, r'images/sonic.png')
+camera = Camera(WorldWidth,WorldHeight,ScreenWidth,ScreenHeight)
+tree = Sprite(200,400,5,r'images/tree.png')
+
+game = True
+while game:
+    ###Для закрытия проги
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT:
+            game = False
+    ###
+    keys = pygame.key.get_pressed()
+
+    player.update(keys)
+    camera.update(player)#НЕ ЗАБУДЬТЕ!
+    window.fill((255,255,255))
+    world.fill((255,255,255))#Surface - поверхность!
+    world.blit(player.image,
+               (player.x,player.y))
+    world.blit(tree.image,
+               (tree.x,tree.y))
+    window.blit(world,
+                (camera.x,camera.y))
+    pygame.display.update()
+
+pygame.quit()
