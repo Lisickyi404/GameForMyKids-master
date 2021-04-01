@@ -2,6 +2,8 @@ import pygame
 import random
 from sprites import *
 ##привет
+
+##привет2222
 def collide(Sprite1, Sprite2):
     if ((Sprite1.x <  Sprite2.x  < Sprite1.x + Sprite1.width
         and   Sprite1.y < Sprite2.y < Sprite1.y + Sprite1.height)
